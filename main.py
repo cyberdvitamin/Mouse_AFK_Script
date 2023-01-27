@@ -1,3 +1,5 @@
+import random
+
 import pyautogui, keyboard, numpy, time
 
 # Getting screen size
@@ -68,9 +70,18 @@ print(str(time_day) + "." + str(time_mon) + "." + str(now.tm_year))
 answer = input("Do you want to add auto shut down at a specific hour? Y/N\n")
 answer_bool = False
 if answer == 'Y' or answer == 'y':
-    shut_down_hour = int(input("What hour of the day?\n"))
-    shut_down_min = int(input("What minute of the hour?\n"))
+    shutDownHour = int(input("What hour of the day?\n"))
+    shutDownMin = int(input("What minute of the hour?\n"))
     answer_bool = True
+
+# Text to write over and over
+
+AFKText = input("What do you want the text to be written over and over?\n")
+
+# Time to click your mouse to somewhere safe to write
+
+startingDelay = int(input("How many senconds do you need to wait until the scripts run?\n"))
+time.sleep(startingDelay)
 
 # Loop for mouse movement and shut down
 
@@ -84,7 +95,11 @@ while True:
             MoveToY = numpy.random.randint(0, ScreenY)
             MoveToTime = numpy.random.uniform(0.2, 2)
             pyautogui.moveTo(MoveToX, MoveToY, MoveToTime)
-            if answer_bool is True and now.tm_hour == shut_down_hour and now.tm_min == shut_down_min:
+
+            if random.randint(0, 100) <= 40:
+                pyautogui.write(AFKText, interval = round(random.uniform(0.01, 0.30), 2))
+
+            if answer_bool is True and now.tm_hour == shutDownHour and now.tm_min == shutDownMin:
                 pyautogui.hotkey('win', 'r')
                 pyautogui.write("shutdown /s")
                 pyautogui.press("enter")
