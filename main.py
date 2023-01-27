@@ -67,9 +67,9 @@ print(str(time_day) + "." + str(time_mon) + "." + str(now.tm_year))
 
 # Shut down PC option
 
-answer = input("Do you want to add auto shut down at a specific hour? Y/N\n")
+answer = input("Do you want to add auto shut down at a specific hour? Y/N\n").lower()
 answer_bool = False
-if answer == 'Y' or answer == 'y':
+if answer == 'y':
     shutDownHour = int(input("What hour of the day?\n"))
     shutDownMin = int(input("What minute of the hour?\n"))
     answer_bool = True
